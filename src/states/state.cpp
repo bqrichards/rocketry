@@ -17,7 +17,3 @@ bool State::shouldAdvance(const rocket_sensor_data sensor_data, unsigned long dt
 
     return false;
 }
-
-uint16_t State::imuSampleRate() {
-	return 10;
-}

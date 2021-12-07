@@ -8,6 +8,7 @@
 #include "statemachine.h"
 #include "states/states.h"
 #include "rocket_sensor_data.h"
+#include "t_interval.h"
 #include <Adafruit_BNO055.h>
 #include <Adafruit_BMP280.h>
 
@@ -33,6 +34,31 @@ protected:
 	void update_time();
 
 	/**
+	 * Send data to telemetry
+	 */
+	void send_telemetry();
+
+	/**
+	 * The current telemetry message
+	 */
+	char telemetry_message[200] = "";
+
+	/**
+	 * The interval to update the IMU
+	 */
+	t_interval imu_interval = {0, 10};
+
+	/**
+	 * The interval to update the barometer
+	 */
+	t_interval barometer_interval = {0, 10};
+
+	/**
+	 * The interval to send telemetry data
+	 */
+	t_interval telemetry_interval = {0, 10};
+
+	/**
 	 * Array of pointers to states of the rocket
 	 */
     State** states;
@@ -56,9 +82,9 @@ protected:
 	 * Sensor data from all sensors
 	 */
 	rocket_sensor_data sensor_data = {
-			.imu = {},
-			.temperature = {},
-			.altitude = {}
+			{},
+			{},
+			{}
 	};
 
 	/**
@@ -70,6 +96,8 @@ protected:
 	 * The microsecond of the last tick
 	 */
 	unsigned long last_micro = 0L;
+
+
 };
 
 

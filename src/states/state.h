@@ -29,14 +29,7 @@ public:
 	 * @param dt the difference in time since last call in microseconds
 	 * @return whether this state is finished and the next state should run
 	 */
-    [[nodiscard]] virtual bool shouldAdvance(const rocket_sensor_data sensor_data, unsigned long dt);
-
-    /**
-     * The frequency in milliseconds that the state wants the IMU to be sampled.
-     * @default 10
-     * @return milliseconds
-     */
-    [[nodiscard]] virtual uint16_t imuSampleRate();
+    [[nodiscard]] virtual bool shouldAdvance(rocket_sensor_data sensor_data, unsigned long dt);
 
 protected:
 	/**
