@@ -18,14 +18,14 @@ public:
     /**
      * @return whether this state is finished and the next state should run
      */
-    virtual bool shouldAdvance(sensors_event_t orientation, sensors_event_t acceleration, double dt);
+    [[nodiscard]] virtual bool shouldAdvance(sensors_event_t orientation, sensors_event_t acceleration, double dt);
 
     /**
      * The frequency in milliseconds that the state wants the IMU to be sampled.
      * @default 10
      * @return milliseconds
      */
-    virtual uint16_t imuSampleRate();
+    [[nodiscard]] virtual uint16_t imuSampleRate();
 };
 
 #endif //ROCKETRY_STATE_H

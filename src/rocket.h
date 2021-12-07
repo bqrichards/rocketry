@@ -6,7 +6,7 @@
 #define ROCKETRY_ROCKET_H
 
 #include "statemachine.h"
-#include "states/groundIdle.h"
+#include "states/states.h"
 #include <Adafruit_BNO055.h>
 #include <Adafruit_BMP280.h>
 
@@ -26,12 +26,14 @@ protected:
      */
     void pollSensors();
 
+    State** states;
+
     StateMachine stateMachine = StateMachine();
     Adafruit_BNO055 imu;
     Adafruit_BMP280 barometer;
-    sensors_event_t orientation;
-    sensors_event_t acceleration;
-    double dt;
+    sensors_event_t orientation = {};
+    sensors_event_t acceleration = {};
+    double dt = -1;
 };
 
 
