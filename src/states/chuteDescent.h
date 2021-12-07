@@ -9,6 +9,9 @@
 #include "state.h"
 
 class StateChuteDescent : public State {
+public:
+	explicit StateChuteDescent(String name);
+
     /**
      * Called when the state is first loaded
      */
@@ -17,7 +20,7 @@ class StateChuteDescent : public State {
     /**
      * @return whether this state is finished and the next state should run
      */
-    bool shouldAdvance(sensors_event_t orientation, sensors_event_t acceleration, double dt) override;
+	bool shouldAdvance(rocket_sensor_data sensor_data, unsigned long dt) override;
 };
 
 

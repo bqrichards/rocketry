@@ -1,14 +1,23 @@
 #include "state.h"
 
-void State::begin() {
-    // TODO - print
+State::State(String name) {
+	this->name = name;
 }
 
-bool State::shouldAdvance(sensors_event_t orientation, sensors_event_t acceleration, double dt) {
-    return true;
+void State::begin() {
+	Serial.println("Beginning state " + this->name);
+}
+
+bool State::shouldAdvance(const rocket_sensor_data sensor_data, unsigned long dt) {
+	char debugMessage[200];
+	unsigned long now = micros();
+
+	sprintf(debugMessage, "Advance %s - $lu", this->name.c_str(), now);
+	Serial.println(debugMessage);
+
+    return false;
 }
 
 uint16_t State::imuSampleRate() {
-    return 10;
+	return 10;
 }
-

@@ -4,10 +4,13 @@
 
 #include "chuteDescent.h"
 
+StateChuteDescent::StateChuteDescent(String name) : State(name) {
+}
+
 void StateChuteDescent::begin() {
     State::begin();
 }
 
-bool StateChuteDescent::shouldAdvance(sensors_event_t orientation, sensors_event_t acceleration, double dt) {
-    return State::shouldAdvance(orientation, acceleration, dt);
+bool StateChuteDescent::shouldAdvance(const rocket_sensor_data sensor_data, unsigned long dt) {
+    return State::shouldAdvance(sensor_data, dt);
 }

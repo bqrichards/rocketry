@@ -4,10 +4,13 @@
 
 #include "poweredFlight.h"
 
+StagePoweredFlight::StagePoweredFlight(String name) : State(name) {
+}
+
 void StagePoweredFlight::begin() {
     State::begin();
 }
 
-bool StagePoweredFlight::shouldAdvance(sensors_event_t orientation, sensors_event_t acceleration, double dt) {
-    return State::shouldAdvance(orientation, acceleration, dt);
+bool StagePoweredFlight::shouldAdvance(const rocket_sensor_data sensor_data, unsigned long dt) {
+    return State::shouldAdvance(sensor_data, dt);
 }
