@@ -5,28 +5,28 @@
 #ifndef ROCKETRY_ROCKET_H
 #define ROCKETRY_ROCKET_H
 
+#include "rocket_sensor_data.h"
 #include "statemachine.h"
 #include "states/states.h"
-#include "rocket_sensor_data.h"
 #include "t_interval.h"
-#include <Adafruit_BNO055.h>
 #include <Adafruit_BMP280.h>
+#include <Adafruit_BNO055.h>
 
 class rocket {
 public:
-    rocket();
+	rocket();
 
-    /**
+	/**
      * Update the rocket's state
      * @return whether the rocket is done executing
      */
-    bool tick();
+	bool tick();
 
 protected:
-    /**
+	/**
      * Update sensor events from sensors
      */
-    void poll_sensors();
+	void poll_sensors();
 
 	/**
 	 * Update dt and last_micro
@@ -61,22 +61,22 @@ protected:
 	/**
 	 * Array of pointers to states of the rocket
 	 */
-    State** states;
+	State** states;
 
 	/**
 	 * The state machine of the rocket
 	 */
-    StateMachine stateMachine = StateMachine();
+	StateMachine stateMachine = StateMachine();
 
 	/**
 	 * IMU sensor
 	 */
-    Adafruit_BNO055 imu;
+	Adafruit_BNO055 imu;
 
 	/**
 	 * Barometric pressure sensor
 	 */
-    Adafruit_BMP280 barometer;
+	Adafruit_BMP280 barometer;
 
 	/**
 	 * Sensor data from all sensors
@@ -84,21 +84,18 @@ protected:
 	rocket_sensor_data sensor_data = {
 			{},
 			{},
-			{}
-	};
+			{}};
 
 	/**
 	 * The delta time in microseconds since last tick
 	 */
-    unsigned long dt = 0L;
+	unsigned long dt = 0L;
 
 	/**
 	 * The microsecond of the last tick
 	 */
 	unsigned long last_micro = 0L;
-
-
 };
 
 
-#endif //ROCKETRY_ROCKET_H
+#endif//ROCKETRY_ROCKET_H

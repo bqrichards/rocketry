@@ -5,44 +5,44 @@
 #ifndef ROCKETRY_STATEMACHINE_H
 #define ROCKETRY_STATEMACHINE_H
 
-#include <stdint.h>
 #include "states/state.h"
+#include <stdint.h>
 
 class StateMachine {
 public:
-    /**
+	/**
      * Create an empty state machine
      */
-    StateMachine();
+	StateMachine();
 
-    /**
+	/**
      * Create a state machine with an array of states and a count of states
      * @param states the array of states
      * @param state_count the number of states in <code>states</code>
      */
-    StateMachine(State** states, uint8_t state_count);
+	StateMachine(State** states, uint8_t state_count);
 
-    /**
+	/**
      * Gets the current state of the state machine
      * @return current state
      */
-    State* currentState();
+	State* currentState();
 
-    /**
+	/**
      * Advance the state machine to the next state
      */
-    void advance();
+	void advance();
 
-    /**
+	/**
      * Gets if there is a state after this
      * @return if there is a state after this
      */
-    [[nodiscard]] bool hasNextState() const;
+	[[nodiscard]] bool hasNextState() const;
 
 protected:
-    State** states;
-    uint8_t state_count;
-    uint8_t current_state = 0;
+	State** states;
+	uint8_t state_count;
+	uint8_t current_state = 0;
 };
 
-#endif //ROCKETRY_STATEMACHINE_H
+#endif//ROCKETRY_STATEMACHINE_H

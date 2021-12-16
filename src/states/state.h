@@ -5,10 +5,10 @@
 #ifndef ROCKETRY_STATE_H
 #define ROCKETRY_STATE_H
 
-#include <stdint.h>
-#include <Arduino.h>
-#include <Adafruit_Sensor.h>
 #include "../rocket_sensor_data.h"
+#include <Adafruit_Sensor.h>
+#include <Arduino.h>
+#include <stdint.h>
 
 class State {
 public:
@@ -18,10 +18,10 @@ public:
 	 */
 	explicit State(String name);
 
-    /**
+	/**
      * Called when the state is first loaded
      */
-    virtual void begin();
+	virtual void begin();
 
 	/**
 	 * Update state
@@ -29,7 +29,7 @@ public:
 	 * @param dt the difference in time since last call in microseconds
 	 * @return whether this state is finished and the next state should run
 	 */
-    [[nodiscard]] virtual bool shouldAdvance(rocket_sensor_data sensor_data, unsigned long dt);
+	[[nodiscard]] virtual bool shouldAdvance(rocket_sensor_data sensor_data, unsigned long dt);
 
 protected:
 	/**
@@ -38,4 +38,4 @@ protected:
 	String name;
 };
 
-#endif //ROCKETRY_STATE_H
+#endif//ROCKETRY_STATE_H
