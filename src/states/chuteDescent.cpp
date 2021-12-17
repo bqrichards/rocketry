@@ -11,6 +11,6 @@ void StateChuteDescent::begin() {
 	State::begin();
 }
 
-bool StateChuteDescent::shouldAdvance(const rocket_sensor_data sensor_data, unsigned long dt) {
+bool StateChuteDescent::shouldAdvance(rocket_sensor_data* sensor_data, unsigned long dt) {
 	return State::shouldAdvance(sensor_data, dt);
 }

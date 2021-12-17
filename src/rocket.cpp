@@ -13,7 +13,7 @@ rocket::rocket() {
 
 	// Create states
 	this->states = new State* [6] {
-		new StageGroundIdle("Ground Idle"),
+		new StageGroundIdle(),
 				new StagePoweredFlight("Powered Flight"),
 				new StateUnpoweredFlight("Unpowered Flight"),
 				new StateBallisticDescent("Ballistic Descent"),
@@ -36,7 +36,7 @@ bool rocket::tick() {
 		t_reset(&this->telemetry_interval);
 	}
 
-	bool stateDone = this->stateMachine.currentState()->shouldAdvance(this->sensor_data, this->dt);
+	bool stateDone = this->stateMachine.currentState()->shouldAdvance(&this->sensor_data, this->dt);
 	if (!stateDone) return false;
 
 	if (this->stateMachine.hasNextState()) {

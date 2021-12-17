@@ -29,7 +29,7 @@ public:
 	 * @param dt the difference in time since last call in microseconds
 	 * @return whether this state is finished and the next state should run
 	 */
-	[[nodiscard]] virtual bool shouldAdvance(rocket_sensor_data sensor_data, unsigned long dt);
+	[[nodiscard]] virtual bool shouldAdvance(rocket_sensor_data* sensor_data, unsigned long dt);
 
 protected:
 	/**

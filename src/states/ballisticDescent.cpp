@@ -11,6 +11,6 @@ void StateBallisticDescent::begin() {
 	State::begin();
 }
 
-bool StateBallisticDescent::shouldAdvance(const rocket_sensor_data sensor_data, unsigned long dt) {
+bool StateBallisticDescent::shouldAdvance(rocket_sensor_data* sensor_data, unsigned long dt) {
 	return State::shouldAdvance(sensor_data, dt);
 }

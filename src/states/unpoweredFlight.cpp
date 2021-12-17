@@ -11,6 +11,6 @@ void StateUnpoweredFlight::begin() {
 	State::begin();
 }
 
-bool StateUnpoweredFlight::shouldAdvance(const rocket_sensor_data sensor_data, unsigned long dt) {
+bool StateUnpoweredFlight::shouldAdvance(rocket_sensor_data* sensor_data, unsigned long dt) {
 	return State::shouldAdvance(sensor_data, dt);
 }
