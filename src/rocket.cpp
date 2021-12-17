@@ -54,14 +54,15 @@ void rocket::update_time() {
 
 void rocket::poll_sensors() {
 	if (t_check(&this->imu_interval)) {
-		this->imu.getEvent(&this->sensor_data.imu);
 		t_reset(&this->imu_interval);
+		this->sensor_data.acceleration = this->imu.getVector(Adafruit_BNO055::VECTOR_LINEARACCEL);
 	}
 
 	if (t_check(&this->barometer_interval)) {
-		this->barometer.getTemperatureSensor()->getEvent(&this->sensor_data.temperature);
-		this->barometer.getPressureSensor()->getEvent(&this->sensor_data.altitude);
 		t_reset(&this->barometer_interval);
+		this->sensor_data.temperature = this->barometer.readTemperature();
+		this->sensor_data.altitude = this->barometer.readAltitude();
+		this->sensor_data.pressure = this->barometer.readPressure();
 	}
 }
 

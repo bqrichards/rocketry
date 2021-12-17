@@ -6,25 +6,31 @@
 #define ROCKETRY_ROCKET_SENSOR_DATA_H
 
 #include <Adafruit_Sensor.h>
+#include "utility/vector.h"
 
 /**
  * Sensor data from IMU and barometric pressure sensor
  */
 typedef struct rocket_sensor_data {
 	/**
-	 * Sensor data from IMU
+	 * Acceleration (m/s^2)
 	 */
-	sensors_event_t imu;
+	imu::Vector<3> acceleration = imu::Vector<3>();
 
 	/**
-	 * Sensor data from temperature sensor
+	 * Temperature (celsius)
 	 */
-	sensors_event_t temperature;
+	float temperature = 0;
 
 	/**
-	 * Sensor data from barometer
+	 * Altitude (m)
 	 */
-	sensors_event_t altitude;
+	float altitude = 0;
+
+	/**
+	 * Pressure (Pascals)
+	 */
+	float pressure = 0;
 } rocket_sensor_data;
 
 #endif//ROCKETRY_ROCKET_SENSOR_DATA_H

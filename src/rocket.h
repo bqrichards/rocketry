@@ -81,10 +81,7 @@ protected:
 	/**
 	 * Sensor data from all sensors
 	 */
-	rocket_sensor_data sensor_data = {
-			{},
-			{},
-			{}};
+	rocket_sensor_data sensor_data;
 
 	/**
 	 * The delta time in microseconds since last tick
