@@ -10,7 +10,7 @@
 
 class StateUnpoweredFlight : public State {
 public:
-	explicit StateUnpoweredFlight(String name);
+	explicit StateUnpoweredFlight();
 
 	/**
      * Called when the state is first loaded

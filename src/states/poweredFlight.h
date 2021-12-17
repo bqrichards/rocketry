@@ -9,7 +9,7 @@
 
 class StagePoweredFlight : public State {
 public:
-	explicit StagePoweredFlight(String name);
+	explicit StagePoweredFlight();
 
 	/**
      * Called when the state is first loaded

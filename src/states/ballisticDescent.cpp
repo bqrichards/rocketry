@@ -4,7 +4,7 @@
 
 #include "ballisticDescent.h"
 
-StateBallisticDescent::StateBallisticDescent(String name) : State(name) {
+StateBallisticDescent::StateBallisticDescent() : State("Ballistic Descent") {
 }
 
 void StateBallisticDescent::begin() {

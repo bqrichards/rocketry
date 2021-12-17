@@ -10,7 +10,7 @@
 
 class StateLanded : public State {
 public:
-	explicit StateLanded(String name);
+	explicit StateLanded();
 
 	/**
      * Called when the state is first loaded

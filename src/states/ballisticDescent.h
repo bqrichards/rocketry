@@ -10,7 +10,7 @@
 
 class StateBallisticDescent : public State {
 public:
-	explicit StateBallisticDescent(String name);
+	explicit StateBallisticDescent();
 
 	/**
      * Called when the state is first loaded

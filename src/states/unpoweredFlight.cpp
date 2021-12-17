@@ -4,7 +4,7 @@
 
 #include "unpoweredFlight.h"
 
-StateUnpoweredFlight::StateUnpoweredFlight(String name) : State(name) {
+StateUnpoweredFlight::StateUnpoweredFlight() : State("Unpowered Flight") {
 }
 
 void StateUnpoweredFlight::begin() {

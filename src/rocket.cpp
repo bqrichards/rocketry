@@ -14,11 +14,11 @@ rocket::rocket() {
 	// Create states
 	this->states = new State* [6] {
 		new StageGroundIdle(),
-				new StagePoweredFlight("Powered Flight"),
-				new StateUnpoweredFlight("Unpowered Flight"),
-				new StateBallisticDescent("Ballistic Descent"),
-				new StateChuteDescent("Chute Descent"),
-				new StateLanded("Landed")
+				new StagePoweredFlight(),
+				new StateUnpoweredFlight(),
+				new StateBallisticDescent(),
+				new StateChuteDescent(),
+				new StateLanded()
 	};
 
 	// Create state machine

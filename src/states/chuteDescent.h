@@ -10,7 +10,7 @@
 
 class StateChuteDescent : public State {
 public:
-	explicit StateChuteDescent(String name);
+	explicit StateChuteDescent();
 
 	/**
      * Called when the state is first loaded

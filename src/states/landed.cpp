@@ -4,7 +4,7 @@
 
 #include "landed.h"
 
-StateLanded::StateLanded(String name) : State(name) {
+StateLanded::StateLanded() : State("Landed") {
 }
 
 void StateLanded::begin() {
