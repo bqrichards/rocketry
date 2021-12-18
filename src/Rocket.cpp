@@ -56,7 +56,10 @@ void Rocket::update_time() {
 void Rocket::poll_sensors() {
 	if (t_check(&this->imu_interval)) {
 		t_reset(&this->imu_interval);
-		this->sensor_data.acceleration = this->imu.getVector(Adafruit_BNO055::VECTOR_LINEARACCEL);
+		imu::Vector<3> data = this->imu.getVector(Adafruit_BNO055::VECTOR_LINEARACCEL);
+		this->sensor_data.acceleration.x = data.x();
+		this->sensor_data.acceleration.y = data.y();
+		this->sensor_data.acceleration.z = data.z();
 	}
 
 	if (t_check(&this->barometer_interval)) {

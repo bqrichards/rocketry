@@ -5,8 +5,11 @@
 #ifndef ROCKETRY_ROCKET_SENSOR_DATA_H
 #define ROCKETRY_ROCKET_SENSOR_DATA_H
 
-#include <Adafruit_Sensor.h>
-#include "vector.h"
+typedef struct vector_3 {
+	double x;
+	double y;
+	double z;
+} vector_3;
 
 /**
  * Sensor data from IMU and barometric pressure sensor
@@ -15,7 +18,7 @@ typedef struct rocket_sensor_data {
 	/**
 	 * Acceleration (m/s^2)
 	 */
-	imu::Vector<3> acceleration = imu::Vector<3>();
+	vector_3 acceleration = {};
 
 	/**
 	 * Temperature (celsius)
