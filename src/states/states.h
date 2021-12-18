@@ -12,4 +12,4 @@
 #include "poweredFlight.h"
 #include "unpoweredFlight.h"
 
-#endif//ROCKETRY_STATES_H
+#endif  // ROCKETRY_STATES_H

@@ -9,21 +9,22 @@
 
 /**
  * An interval.
- * @link http://hwhacks.com/2016/05/08/scheduling-arduino-code-run-every-x-seconds/
+ * @link
+ * http://hwhacks.com/2016/05/08/scheduling-arduino-code-run-every-x-seconds/
  * @see t_check
  * @see t_reset
  */
 typedef struct t_interval {
-	unsigned long t_start;
+  unsigned long t_start;
 
-	/**
-	 * The interval in milliseconds
-	 */
-	unsigned long t_timeout;
+  /**
+   * The interval in milliseconds
+   */
+  unsigned long t_timeout;
 } t_interval;
 
-bool t_check(t_interval* interval);
+bool t_check(t_interval *interval);
 
-void t_reset(t_interval* interval);
+void t_reset(t_interval *interval);
 
-#endif//ROCKETRY_T_INTERVAL_H
+#endif  // ROCKETRY_T_INTERVAL_H
