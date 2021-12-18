@@ -11,7 +11,7 @@ bool State::shouldAdvance(rocket_sensor_data *sensor_data, unsigned long dt) {
   char debugMessage[200];
   unsigned long now = micros();
 
-  sprintf(debugMessage, "Advance %s - $lu", this->name.c_str(), now);
+  sprintf(debugMessage, "Advance %s - %lu", this->name.c_str(), now);
   Serial.println(debugMessage);
 
   return false;

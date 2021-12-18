@@ -4,12 +4,12 @@
 
 #include "telemetry.h"
 
-void format_sensor_data_to_csv(rocket_sensor_data *data, std::string *out) {
-  std::stringstream csv_stream;
-  csv_stream << std::fixed << std::setprecision(2);
-  csv_stream << data->acceleration.x << "," << data->acceleration.y << ","
-             << data->acceleration.z << ",";
-  csv_stream << data->pressure << "," << data->altitude << ","
-             << data->temperature;
-  *out = csv_stream.str();
+void format_sensor_data_to_csv(rocket_sensor_data *data, char *out) {
+  // Clear string
+  memset(out, 0, strlen(out));
+
+  // Format data
+  sprintf(out, "%0.2f,%0.2f,%0.2f,%0.2f,%0.2f,%0.2f", data->acceleration.x,
+          data->acceleration.y, data->acceleration.z, data->pressure,
+          data->altitude, data->temperature);
 }

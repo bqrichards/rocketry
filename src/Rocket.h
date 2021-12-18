@@ -10,8 +10,6 @@
 #include <RH_ASK.h>
 #include <SPI.h>
 
-#include <string>
-
 #include "rocket_sensor_data.h"
 #include "statemachine.h"
 #include "states/states.h"
@@ -47,7 +45,7 @@ class Rocket {
   /**
    * The current telemetry message
    */
-  std::string telemetry_message = "";
+  char telemetry_message[100] = "";
 
   /**
    * The interval to update the IMU
@@ -84,7 +82,10 @@ class Rocket {
    */
   Adafruit_BMP280 barometer;
 
-  RH_ASK radio;
+  /**
+   * Telemetry radio
+   */
+  RH_ASK telemetry_radio;
 
   /**
    * Sensor data from all sensors
