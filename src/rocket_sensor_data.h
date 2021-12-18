@@ -6,7 +6,7 @@
 #define ROCKETRY_ROCKET_SENSOR_DATA_H
 
 #include <Adafruit_Sensor.h>
-#include "utility/vector.h"
+#include "vector.h"
 
 /**
  * Sensor data from IMU and barometric pressure sensor
