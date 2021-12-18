@@ -2,9 +2,9 @@
 // Created by Brandon Richards on 12/6/21.
 //
 
-#include "rocket.h"
+#include "Rocket.h"
 
-rocket::rocket() {
+Rocket::Rocket() {
 	// Initialize imu
 	this->imu = Adafruit_BNO055(55);
 
@@ -27,7 +27,7 @@ rocket::rocket() {
 	this->last_micro = micros();
 }
 
-bool rocket::tick() {
+bool Rocket::tick() {
 	this->update_time();
 	this->poll_sensors();
 
@@ -41,18 +41,19 @@ bool rocket::tick() {
 
 	if (this->stateMachine.hasNextState()) {
 		this->stateMachine.advance();
+		return false;
 	} else {
 		return true;
 	}
 }
 
-void rocket::update_time() {
+void Rocket::update_time() {
 	unsigned long now = micros();
 	this->dt = now - this->last_micro;
 	this->last_micro = now;
 }
 
-void rocket::poll_sensors() {
+void Rocket::poll_sensors() {
 	if (t_check(&this->imu_interval)) {
 		t_reset(&this->imu_interval);
 		this->sensor_data.acceleration = this->imu.getVector(Adafruit_BNO055::VECTOR_LINEARACCEL);
@@ -66,7 +67,7 @@ void rocket::poll_sensors() {
 	}
 }
 
-void rocket::send_telemetry() {
+void Rocket::send_telemetry() {
 	// Format data
 	memset(this->telemetry_message, 0, sizeof(this->telemetry_message));
 	sprintf(this->telemetry_message, "%lu", this->last_micro);

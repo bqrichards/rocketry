@@ -7,7 +7,6 @@
 
 #include <Arduino.h>
 
-
 /**
  * An interval.
  * @link http://hwhacks.com/2016/05/08/scheduling-arduino-code-run-every-x-seconds/

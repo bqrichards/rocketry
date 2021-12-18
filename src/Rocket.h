@@ -12,9 +12,9 @@
 #include <Adafruit_BMP280.h>
 #include <Adafruit_BNO055.h>
 
-class rocket {
+class Rocket {
 public:
-	rocket();
+	Rocket();
 
 	/**
      * Update the rocket's state
