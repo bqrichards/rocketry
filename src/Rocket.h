@@ -45,7 +45,7 @@ class Rocket {
   /**
    * The current telemetry message
    */
-  char telemetry_message[100] = "";
+  char telemetry_message[TELEMETRY_MESSAGE_SIZE] = "";
 
   /**
    * The interval to update the IMU

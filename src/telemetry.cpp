@@ -4,9 +4,10 @@
 
 #include "telemetry.h"
 
-void format_sensor_data_to_csv(rocket_sensor_data *data, char *out) {
+void format_sensor_data_to_csv(rocket_sensor_data *data,
+                               char out[TELEMETRY_MESSAGE_SIZE]) {
   // Clear string
-  memset(out, 0, strlen(out));
+  memset(out, 0, TELEMETRY_MESSAGE_SIZE * sizeof(char));
 
   // Format data
   sprintf(out, "%0.2f,%0.2f,%0.2f,%0.2f,%0.2f,%0.2f", data->acceleration.x,
