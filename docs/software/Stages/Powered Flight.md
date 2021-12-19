@@ -6,4 +6,4 @@
 The event loop is watching for engine running out of fuel.
 
 ### Criteria
-1. Current altitude > (altitude from 250 milliseconds ago)
+1. MECO

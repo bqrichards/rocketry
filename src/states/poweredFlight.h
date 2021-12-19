@@ -6,7 +6,6 @@
 #define ROCKETRY_POWEREDFLIGHT_H
 
 #include "state.h"
-#include "../t_interval.h"
 
 class StagePoweredFlight : public State {
  public:
@@ -22,11 +21,6 @@ class StagePoweredFlight : public State {
    */
   bool shouldAdvance(rocket_sensor_data *sensor_data,
                      unsigned long dt) override;
-
- private:
-  float last_altitude = 0;
-
-  t_interval altitude_check_interval = {0, 250};
 };
 
 #endif  // ROCKETRY_POWEREDFLIGHT_H
