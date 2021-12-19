@@ -5,11 +5,14 @@
 #include "Rocket.h"
 
 Rocket::Rocket() {
-  // Initialize imu
+  // Initialize IMU
   this->imu = Adafruit_BNO055(55);
 
   // Initialize barometer
   this->barometer = Adafruit_BMP280();
+
+  // Initialize radio
+  this->telemetry_radio = new RH_RF22(10, 3);
 
   // Create states
   this->states = new State *[6] {
@@ -28,8 +31,8 @@ bool Rocket::tick() {
   this->poll_sensors();
 
   if (t_check(&this->telemetry_interval)) {
-    this->send_telemetry();
     t_reset(&this->telemetry_interval);
+    this->send_telemetry();
   }
 
   bool stateDone = this->stateMachine.currentState()->shouldAdvance(
@@ -76,7 +79,7 @@ void Rocket::send_telemetry() {
   Serial.println(this->telemetry_message);
 
   // Send data remote
-  this->telemetry_radio.send(
+  this->telemetry_radio->send(
       reinterpret_cast<const uint8_t *>(this->telemetry_message),
       strlen(this->telemetry_message));
 }

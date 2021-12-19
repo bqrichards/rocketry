@@ -1,5 +1,13 @@
 #include <Arduino.h>
 
-void setup() {}
+#include "Rocket.h"
 
-void loop() {}
+Rocket r;
+
+void setup() { r = Rocket(); }
+
+void loop() {
+  if (r.tick()) {
+    exit(0);
+  }
+}

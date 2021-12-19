@@ -7,7 +7,7 @@
 
 #include <Adafruit_BMP280.h>
 #include <Adafruit_BNO055.h>
-#include <RH_ASK.h>
+#include <RH_RF22.h>
 #include <SPI.h>
 
 #include "rocket_sensor_data.h"
@@ -65,7 +65,7 @@ class Rocket {
   /**
    * Array of pointers to states of the rocket
    */
-  State **states;
+  State** states;
 
   /**
    * The state machine of the rocket
@@ -83,9 +83,9 @@ class Rocket {
   Adafruit_BMP280 barometer;
 
   /**
-   * Telemetry radio
+   * Telemetry radio.
    */
-  RH_ASK telemetry_radio;
+  RH_RF22* telemetry_radio;
 
   /**
    * Sensor data from all sensors
