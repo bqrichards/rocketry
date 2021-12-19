@@ -1,9 +1,12 @@
 # Stage - Ballistic Descent
 ## Sensors
 - [[Barometer]]
+
+## Begin
+Deploy chute
 ## Event Loop
 ### Overview
-The event loop is watching for rocket falling under 25m to deploy the parachute.
+The event loop is watching for change in rocket's acceleration to indicate [[Chute Descent]].
 
 ### Criteria
-1. Current altitude < 25m
+1. Acceleration Z rate of change < 1 m/s^3

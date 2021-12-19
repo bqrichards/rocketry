@@ -21,6 +21,13 @@ class StateChuteDescent : public State {
    */
   bool shouldAdvance(rocket_sensor_data *sensor_data,
                      unsigned long dt) override;
+
+ private:
+  const float ALTITUDE_LANDED_THRESHOLD = 5;
+
+  const unsigned long LANDED_DURATION_THRESHOLD = 1000;
+
+  unsigned long landed_started_millis = 0;
 };
 
 #endif  // ROCKETRY_CHUTEDESCENT_H
