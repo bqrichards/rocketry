@@ -13,6 +13,7 @@ typedef struct vector_3 {
 
 /**
  * Sensor data from IMU and barometric pressure sensor
+ * TODO add velocity
  */
 typedef struct rocket_sensor_data {
   /**
@@ -21,9 +22,9 @@ typedef struct rocket_sensor_data {
   vector_3 acceleration = {};
 
   /**
-   * Temperature (celsius)
+   * Pressure (Pascals)
    */
-  float temperature = 0;
+  float pressure = 0;
 
   /**
    * Altitude (m)
@@ -31,9 +32,9 @@ typedef struct rocket_sensor_data {
   float altitude = 0;
 
   /**
-   * Pressure (Pascals)
+   * Temperature (celsius)
    */
-  float pressure = 0;
+  float temperature = 0;
 } rocket_sensor_data;
 
 #endif  // ROCKETRY_ROCKET_SENSOR_DATA_H

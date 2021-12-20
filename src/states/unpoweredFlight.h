@@ -5,8 +5,8 @@
 #ifndef ROCKETRY_UNPOWEREDFLIGHT_H
 #define ROCKETRY_UNPOWEREDFLIGHT_H
 
-#include "state.h"
 #include "../t_interval.h"
+#include "state.h"
 
 class StateUnpoweredFlight : public State {
  public:
@@ -22,6 +22,7 @@ class StateUnpoweredFlight : public State {
    */
   bool shouldAdvance(rocket_sensor_data *sensor_data,
                      unsigned long dt) override;
+
  private:
   float last_altitude = 0;
 

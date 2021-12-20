@@ -5,10 +5,9 @@
 #ifndef ROCKETRY_TELEMETRY_H
 #define ROCKETRY_TELEMETRY_H
 
+#include <rocket_sensor_data.h>
 #include <stdio.h>
 #include <string.h>
-
-#include "rocket_sensor_data.h"
 
 #define TELEMETRY_MESSAGE_SIZE 150
 

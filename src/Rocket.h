@@ -9,12 +9,11 @@
 #include <Adafruit_BNO055.h>
 #include <RH_RF22.h>
 #include <SPI.h>
+#include <telemetry.h>
 
-#include "rocket_sensor_data.h"
 #include "statemachine.h"
 #include "states/states.h"
 #include "t_interval.h"
-#include "telemetry.h"
 
 class Rocket {
  public:

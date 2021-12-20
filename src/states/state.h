@@ -7,9 +7,8 @@
 
 #include <Adafruit_Sensor.h>
 #include <Arduino.h>
+#include <rocket_sensor_data.h>
 #include <stdint.h>
-
-#include "../rocket_sensor_data.h"
 
 class State {
  public:
