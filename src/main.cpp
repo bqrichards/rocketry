@@ -4,7 +4,10 @@
 
 Rocket r;
 
-void setup() { r = Rocket(); }
+void setup() {
+  r = Rocket();
+  r.boot();
+}
 
 void loop() {
   if (r.tick()) {

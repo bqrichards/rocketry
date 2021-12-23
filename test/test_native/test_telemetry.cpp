@@ -6,7 +6,6 @@
 
 char out[TELEMETRY_MESSAGE_SIZE];
 
-void run_tests();
 void test_empty_sensor_data() {
   rocket_sensor_data sensor_data;
   format_sensor_data_to_csv(&sensor_data, out);

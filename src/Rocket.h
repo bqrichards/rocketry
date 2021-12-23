@@ -20,6 +20,11 @@ class Rocket {
   Rocket();
 
   /**
+   * Begins sensor boot
+   */
+  void boot();
+
+  /**
    * Update the rocket's state
    * @return whether the rocket is done executing
    */
@@ -52,7 +57,7 @@ class Rocket {
   t_interval imu_interval = {0, 10};
 
   /**
-   * The interval to update the barometer
+   * The interval to update the bmp
    */
   t_interval barometer_interval = {0, 10};
 
@@ -79,7 +84,7 @@ class Rocket {
   /**
    * Barometric pressure sensor
    */
-  Adafruit_BMP280 barometer;
+  Adafruit_BMP280 bmp;
 
   /**
    * Telemetry radio.

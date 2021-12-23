@@ -7,9 +7,10 @@
 Rocket::Rocket() {
   // Initialize IMU
   this->imu = Adafruit_BNO055(55);
+  // this->imu.setExtCrystalUse(true);
 
-  // Initialize barometer
-  this->barometer = Adafruit_BMP280();
+  // Initialize bmp
+  this->bmp = Adafruit_BMP280();
 
   // Initialize radio
   this->telemetry_radio = new RH_RF22(10, 3);
@@ -24,6 +25,22 @@ Rocket::Rocket() {
   this->stateMachine = StateMachine(this->states, 6);
 
   this->last_micro = micros();
+}
+
+void Rocket::boot() {
+  Serial.begin(9600);
+
+  if (!this->imu.begin()) {
+    Serial.println(
+        "Ooops, no BNO055 detected ... Check your wiring or I2C ADDR!");
+    exit(1);
+  }
+
+  if (!this->bmp.begin()) {
+    Serial.println(
+        "Ooops, no BMP280 detected ... Check your wiring or I2C ADDR!");
+    exit(1);
+  }
 }
 
 bool Rocket::tick() {
@@ -65,9 +82,9 @@ void Rocket::poll_sensors() {
 
   if (t_check(&this->barometer_interval)) {
     t_reset(&this->barometer_interval);
-    this->sensor_data.temperature = this->barometer.readTemperature();
-    this->sensor_data.altitude = this->barometer.readAltitude();
-    this->sensor_data.pressure = this->barometer.readPressure();
+    this->sensor_data.temperature = this->bmp.readTemperature();
+    this->sensor_data.altitude = this->bmp.readAltitude();
+    this->sensor_data.pressure = this->bmp.readPressure();
   }
 }
 
