@@ -16,10 +16,12 @@ Rocket::Rocket() {
   this->telemetry_radio = new RH_RF22(10, 3);
 
   // Create states
-  this->states = new State *[6] {
-    new StageGroundIdle(), new StagePoweredFlight(), new StateUnpoweredFlight(),
-        new StateBallisticDescent(), new StateChuteDescent(), new StateLanded()
-  };
+  this->states[0] = new StageGroundIdle();
+  this->states[1] = new StagePoweredFlight();
+  this->states[2] = new StateUnpoweredFlight();
+  this->states[3] = new StateBallisticDescent();
+  this->states[4] = new StateChuteDescent();
+  this->states[5] = new StateLanded();
 
   // Create state machine
   this->stateMachine = StateMachine(this->states, 6);
@@ -41,6 +43,8 @@ void Rocket::boot() {
         "Ooops, no BMP280 detected ... Check your wiring or I2C ADDR!");
     exit(1);
   }
+
+  calibrate_altitude();
 }
 
 bool Rocket::tick() {
@@ -99,4 +103,29 @@ void Rocket::send_telemetry() {
   this->telemetry_radio->send(
       reinterpret_cast<const uint8_t *>(this->telemetry_message),
       strlen(this->telemetry_message));
+}
+
+void Rocket::calibrate_altitude() {
+  Serial.println("Calibrating altitude");
+
+  // Measure average altitude on launchpad
+  uint8_t sample_count = 50;
+  float samples[sample_count];
+  uint8_t i = 0;
+  float total_altitude = 0;
+
+  // TODO Use Chauvenet's criterion to detect outliers in data
+
+  while (i < sample_count) {
+    float alt = this->bmp.readAltitude();
+    samples[i] = alt;
+    total_altitude += alt;
+    i++;
+    delay(100);
+  }
+
+  this->ground_altitude = total_altitude / sample_count;
+
+  Serial.print("Calibration done. Ground altitude: ");
+  Serial.println(this->ground_altitude);
 }

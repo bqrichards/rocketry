@@ -42,7 +42,7 @@ class StateMachine {
 
  protected:
   State **states;
-  uint8_t state_count;
+  uint8_t state_count = 0;
   uint8_t current_state = 0;
 };
 

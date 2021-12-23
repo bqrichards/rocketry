@@ -6,9 +6,9 @@
 #define ROCKETRY_ROCKET_SENSOR_DATA_H
 
 typedef struct vector_3 {
-  double x;
-  double y;
-  double z;
+  double x = 0;
+  double y = 0;
+  double z = 0;
 } vector_3;
 
 /**

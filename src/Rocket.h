@@ -15,6 +15,8 @@
 #include "states/states.h"
 #include "t_interval.h"
 
+#define NUM_ROCKET_STAGES 6
+
 class Rocket {
  public:
   Rocket();
@@ -31,6 +33,12 @@ class Rocket {
   bool tick();
 
  protected:
+  /**
+   * Takes samples from altitude on launchpad and
+   * sets the ground-level altitude
+   */
+  void calibrate_altitude();
+
   /**
    * Update sensor events from sensors
    */
@@ -69,7 +77,7 @@ class Rocket {
   /**
    * Array of pointers to states of the rocket
    */
-  State** states;
+  State* states[NUM_ROCKET_STAGES];
 
   /**
    * The state machine of the rocket
@@ -105,6 +113,11 @@ class Rocket {
    * The microsecond of the last tick
    */
   unsigned long last_micro = 0L;
+
+  /**
+   * The altitude of ground
+   */
+  float ground_altitude = 0;
 };
 
 #endif  // ROCKETRY_ROCKET_H
