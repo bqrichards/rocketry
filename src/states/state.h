@@ -32,6 +32,8 @@ class State {
   [[nodiscard]] virtual bool shouldAdvance(rocket_sensor_data *sensor_data,
                                            unsigned long dt);
 
+  String getName() { return name; }
+
  protected:
   /**
    * Name of the state

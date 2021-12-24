@@ -13,7 +13,6 @@ typedef struct vector_3 {
 
 /**
  * Sensor data from IMU and barometric pressure sensor
- * TODO add velocity
  */
 typedef struct rocket_sensor_data {
   /**
