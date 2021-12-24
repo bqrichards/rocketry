@@ -7,12 +7,12 @@
 
 #include <SPI.h>
 
+#include "../interval/t_interval.h"
 #include "Adafruit_BMP280.h"
 #include "Adafruit_BNO055.h"
 #include "RH_RF22.h"
 #include "statemachine.h"
 #include "states/states.h"
-#include "t_interval.h"
 #include "telemetry.h"
 
 #define NUM_ROCKET_STAGES 6

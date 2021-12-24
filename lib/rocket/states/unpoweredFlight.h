@@ -5,7 +5,7 @@
 #ifndef ROCKETRY_UNPOWEREDFLIGHT_H
 #define ROCKETRY_UNPOWEREDFLIGHT_H
 
-#include "../t_interval.h"
+#include "../../interval/t_interval.h"
 #include "state.h"
 
 class StateUnpoweredFlight : public State {
