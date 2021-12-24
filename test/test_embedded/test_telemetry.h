@@ -12,6 +12,7 @@
 
 void test_empty_sensor_data();
 void test_acceleration();
+void test_orientation();
 void test_pressure();
 void test_altitude();
 void test_temperature();

@@ -21,6 +21,7 @@ void run_tests() {
   // Telemetry
   RUN_TEST(test_empty_sensor_data);
   RUN_TEST(test_acceleration);
+  RUN_TEST(test_orientation);
   RUN_TEST(test_pressure);
   RUN_TEST(test_altitude);
   RUN_TEST(test_temperature);

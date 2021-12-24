@@ -7,7 +7,6 @@
 Rocket::Rocket() {
   // Initialize IMU
   this->imu = Adafruit_BNO055(55);
-  // this->imu.setExtCrystalUse(true);
 
   // Initialize bmp
   this->bmp = Adafruit_BMP280();
@@ -37,6 +36,10 @@ void Rocket::boot() {
         "Ooops, no BNO055 detected ... Check your wiring or I2C ADDR!");
     exit(1);
   }
+
+  delay(100);
+
+  this->imu.setExtCrystalUse(true);
 
   if (!this->bmp.begin()) {
     Serial.println(
@@ -77,11 +80,17 @@ void Rocket::update_time() {
 void Rocket::poll_sensors() {
   if (t_check(&this->imu_interval)) {
     t_reset(&this->imu_interval);
-    imu::Vector<3> data =
+    imu::Vector<3> accel =
         this->imu.getVector(Adafruit_BNO055::VECTOR_LINEARACCEL);
-    this->sensor_data.acceleration.x = data.x();
-    this->sensor_data.acceleration.y = data.y();
-    this->sensor_data.acceleration.z = data.z();
+    imu::Quaternion quat = this->imu.getQuat();
+    this->sensor_data.acceleration.x = accel.x();
+    this->sensor_data.acceleration.y = accel.y();
+    this->sensor_data.acceleration.z = accel.z();
+
+    this->sensor_data.orientation.x = quat.x();
+    this->sensor_data.orientation.y = quat.y();
+    this->sensor_data.orientation.z = quat.z();
+    this->sensor_data.orientation.w = quat.w();
   }
 
   if (t_check(&this->barometer_interval)) {
