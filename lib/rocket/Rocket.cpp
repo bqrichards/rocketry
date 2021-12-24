@@ -94,15 +94,15 @@ void Rocket::poll_sensors() {
 
 void Rocket::send_telemetry() {
   // Format data
-  format_sensor_data_to_csv(&this->sensor_data, this->telemetry_message);
+  format_sensor_data_to_csv(&this->sensor_data, &this->telemetry_message);
 
   // Log data local
   Serial.println(this->telemetry_message);
 
   // Send data remote
   this->telemetry_radio->send(
-      reinterpret_cast<const uint8_t *>(this->telemetry_message),
-      strlen(this->telemetry_message));
+      reinterpret_cast<const uint8_t *>(this->telemetry_message.c_str()),
+      this->telemetry_message.length());
 }
 
 void Rocket::calibrate_altitude() {

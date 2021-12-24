@@ -5,18 +5,17 @@
 #ifndef ROCKETRY_TELEMETRY_H
 #define ROCKETRY_TELEMETRY_H
 
-#include <rocket_sensor_data.h>
+#include <Arduino.h>
 #include <stdio.h>
 #include <string.h>
 
-#define TELEMETRY_MESSAGE_SIZE 150
+#include "rocket_sensor_data.h"
 
 /**
  * Formats rocket sensor data into CSV
  * @param data rocket sensor data
  * @param out the string to write
  */
-void format_sensor_data_to_csv(rocket_sensor_data *data,
-                               char out[TELEMETRY_MESSAGE_SIZE]);
+void format_sensor_data_to_csv(rocket_sensor_data* data, String* out);
 
 #endif  // ROCKETRY_TELEMETRY_H

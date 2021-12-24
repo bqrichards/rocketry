@@ -5,10 +5,11 @@
 #ifndef ROCKETRY_STATE_H
 #define ROCKETRY_STATE_H
 
-#include <Adafruit_Sensor.h>
 #include <Arduino.h>
-#include <rocket_sensor_data.h>
 #include <stdint.h>
+
+#include "Adafruit_Sensor.h"
+#include "rocket_sensor_data.h"
 
 class State {
  public:

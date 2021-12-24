@@ -5,15 +5,15 @@
 #ifndef ROCKETRY_ROCKET_H
 #define ROCKETRY_ROCKET_H
 
-#include <Adafruit_BMP280.h>
-#include <Adafruit_BNO055.h>
-#include <RH_RF22.h>
 #include <SPI.h>
-#include <telemetry.h>
 
+#include "Adafruit_BMP280.h"
+#include "Adafruit_BNO055.h"
+#include "RH_RF22.h"
 #include "statemachine.h"
 #include "states/states.h"
 #include "t_interval.h"
+#include "telemetry.h"
 
 #define NUM_ROCKET_STAGES 6
 
@@ -57,7 +57,7 @@ class Rocket {
   /**
    * The current telemetry message
    */
-  char telemetry_message[TELEMETRY_MESSAGE_SIZE] = "";
+  String telemetry_message = "";
 
   /**
    * The interval to update the IMU
