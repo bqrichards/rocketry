@@ -8,7 +8,4 @@ StateLanded::StateLanded() : State("Landed") {}
 
 void StateLanded::begin() { State::begin(); }
 
-bool StateLanded::shouldAdvance(rocket_sensor_data *sensor_data,
-                                unsigned long dt) {
-  return true;
-}
+bool StateLanded::shouldAdvance(rocket_sensor_data* sensor_data, unsigned long dt) { return true; }

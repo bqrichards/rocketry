@@ -21,13 +21,13 @@ class StateMachine {
    * @param states the array of states
    * @param state_count the number of states in <code>states</code>
    */
-  StateMachine(State **states, uint8_t state_count);
+  StateMachine(State** states, uint8_t state_count);
 
   /**
    * Gets the current state of the state machine
    * @return current state
    */
-  State *currentState();
+  State* currentState();
 
   /**
    * Advance the state machine to the next state
@@ -41,7 +41,7 @@ class StateMachine {
   [[nodiscard]] bool hasNextState() const;
 
  protected:
-  State **states;
+  State** states;
   uint8_t state_count = 0;
   uint8_t current_state = 0;
 };

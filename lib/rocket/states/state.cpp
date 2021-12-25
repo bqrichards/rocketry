@@ -7,7 +7,7 @@ State::State(String name) {
 
 void State::begin() { Serial.println("Beginning state " + this->name); }
 
-bool State::shouldAdvance(rocket_sensor_data *sensor_data, unsigned long dt) {
+bool State::shouldAdvance(rocket_sensor_data* sensor_data, unsigned long dt) {
   char debugMessage[200];
   unsigned long now = micros();
 

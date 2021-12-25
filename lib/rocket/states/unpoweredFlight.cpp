@@ -8,8 +8,7 @@ StateUnpoweredFlight::StateUnpoweredFlight() : State("Unpowered Flight") {}
 
 void StateUnpoweredFlight::begin() { State::begin(); }
 
-bool StateUnpoweredFlight::shouldAdvance(rocket_sensor_data *sensor_data,
-                                         unsigned long dt) {
+bool StateUnpoweredFlight::shouldAdvance(rocket_sensor_data* sensor_data, unsigned long dt) {
   // Only check every 250 ms
   if (!t_check(&this->altitude_check_interval)) {
     return false;
@@ -22,5 +21,4 @@ bool StateUnpoweredFlight::shouldAdvance(rocket_sensor_data *sensor_data,
   this->last_altitude = sensor_data->altitude;
 
   return is_falling;
-
 }

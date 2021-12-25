@@ -32,20 +32,20 @@ void Rocket::boot() {
   Serial.begin(9600);
 
   if (!this->imu.begin()) {
-    Serial.println(
-        "Ooops, no BNO055 detected ... Check your wiring or I2C ADDR!");
+    Serial.println("Ooops, no BNO055 detected ... Check your wiring or I2C ADDR!");
     exit(1);
   }
 
-  delay(100);
+  delay(1000);
 
   this->imu.setExtCrystalUse(true);
 
   if (!this->bmp.begin()) {
-    Serial.println(
-        "Ooops, no BMP280 detected ... Check your wiring or I2C ADDR!");
+    Serial.println("Ooops, no BMP280 detected ... Check your wiring or I2C ADDR!");
     exit(1);
   }
+
+  delay(1000);
 
   calibrate_altitude();
 }
@@ -59,8 +59,7 @@ bool Rocket::tick() {
     this->send_telemetry();
   }
 
-  bool stateDone = this->stateMachine.currentState()->shouldAdvance(
-      &this->sensor_data, this->dt);
+  bool stateDone = this->stateMachine.currentState()->shouldAdvance(&this->sensor_data, this->dt);
   if (!stateDone) return false;
 
   if (this->stateMachine.hasNextState()) {
@@ -80,8 +79,7 @@ void Rocket::update_time() {
 void Rocket::poll_sensors() {
   if (t_check(&this->imu_interval)) {
     t_reset(&this->imu_interval);
-    imu::Vector<3> accel =
-        this->imu.getVector(Adafruit_BNO055::VECTOR_LINEARACCEL);
+    imu::Vector<3> accel = this->imu.getVector(Adafruit_BNO055::VECTOR_LINEARACCEL);
     imu::Quaternion quat = this->imu.getQuat();
     this->sensor_data.acceleration.x = accel.x();
     this->sensor_data.acceleration.y = accel.y();
@@ -109,9 +107,8 @@ void Rocket::send_telemetry() {
   Serial.println(this->telemetry_message);
 
   // Send data remote
-  this->telemetry_radio->send(
-      reinterpret_cast<const uint8_t *>(this->telemetry_message.c_str()),
-      this->telemetry_message.length());
+  this->telemetry_radio->send(reinterpret_cast<const uint8_t*>(this->telemetry_message.c_str()),
+                              this->telemetry_message.length());
 }
 
 void Rocket::calibrate_altitude() {

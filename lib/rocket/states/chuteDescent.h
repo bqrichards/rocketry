@@ -19,8 +19,7 @@ class StateChuteDescent : public State {
   /**
    * @return whether this state is finished and the next state should run
    */
-  bool shouldAdvance(rocket_sensor_data *sensor_data,
-                     unsigned long dt) override;
+  bool shouldAdvance(rocket_sensor_data* sensor_data, unsigned long dt) override;
 
  private:
   const float ALTITUDE_LANDED_THRESHOLD = 5;

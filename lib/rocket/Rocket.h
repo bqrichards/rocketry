@@ -77,7 +77,7 @@ class Rocket {
   /**
    * Array of pointers to states of the rocket
    */
-  State* states[NUM_ROCKET_STAGES];
+  State* states[NUM_ROCKET_STAGES] = {};
 
   /**
    * The state machine of the rocket

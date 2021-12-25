@@ -23,8 +23,8 @@ typedef struct t_interval {
   unsigned long t_timeout;
 } t_interval;
 
-bool t_check(t_interval *interval);
+bool t_check(t_interval* interval);
 
-void t_reset(t_interval *interval);
+void t_reset(t_interval* interval);
 
 #endif  // ROCKETRY_T_INTERVAL_H

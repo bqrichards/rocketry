@@ -8,10 +8,8 @@ StageGroundIdle::StageGroundIdle() : State("Ground Idle") {}
 
 void StageGroundIdle::begin() { State::begin(); }
 
-bool StageGroundIdle::shouldAdvance(rocket_sensor_data *sensor_data,
-                                    unsigned long dt) {
-  bool is_accelerating =
-      sensor_data->acceleration.z >= this->ACCELERATION_THRESHOLD;
+bool StageGroundIdle::shouldAdvance(rocket_sensor_data* sensor_data, unsigned long dt) {
+  bool is_accelerating = sensor_data->acceleration.z >= this->ACCELERATION_THRESHOLD;
   if (!is_accelerating) {
     accelerationStartedMillis = millis();
     return false;

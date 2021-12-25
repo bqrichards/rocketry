@@ -8,8 +8,7 @@ StateChuteDescent::StateChuteDescent() : State("Chute Descent") {}
 
 void StateChuteDescent::begin() { State::begin(); }
 
-bool StateChuteDescent::shouldAdvance(rocket_sensor_data *sensor_data,
-                                      unsigned long dt) {
+bool StateChuteDescent::shouldAdvance(rocket_sensor_data* sensor_data, unsigned long dt) {
   bool landed = sensor_data->altitude < this->ALTITUDE_LANDED_THRESHOLD;
 
   if (!landed) {
