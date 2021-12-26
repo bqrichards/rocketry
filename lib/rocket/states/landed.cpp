@@ -4,7 +4,7 @@
 
 #include "landed.h"
 
-StateLanded::StateLanded() : State("Landed") {}
+StateLanded::StateLanded() : State(5) {}
 
 void StateLanded::begin() { State::begin(); }
 

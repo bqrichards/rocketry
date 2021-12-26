@@ -4,7 +4,7 @@
 
 #include "chuteDescent.h"
 
-StateChuteDescent::StateChuteDescent() : State("Chute Descent") {}
+StateChuteDescent::StateChuteDescent() : State(4) {}
 
 void StateChuteDescent::begin() { State::begin(); }
 

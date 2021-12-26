@@ -4,8 +4,8 @@
 
 #include "test_state.h"
 
-void test_get_name() {
-  State state("State 1");
+void test_get_number() {
+  State state(12);
 
-  TEST_ASSERT_EQUAL_STRING("State 1", state.getName().c_str());
+  TEST_ASSERT_EQUAL(12, state.getNumber());
 }

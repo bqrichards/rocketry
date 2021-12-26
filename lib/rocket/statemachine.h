@@ -41,8 +41,19 @@ class StateMachine {
   [[nodiscard]] bool hasNextState() const;
 
  protected:
+  /**
+    * An array of pointers to State objects
+    */
   State** states;
+
+  /**
+   * The total number of states in the <code>states</code> array
+   */
   uint8_t state_count = 0;
+
+  /**
+   * The index of the current state
+   */
   uint8_t current_state = 0;
 };
 

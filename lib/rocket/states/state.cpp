@@ -1,18 +1,14 @@
 #include "state.h"
 
-State::State(String name) {
-  this->name = name;
-  Serial.println("Initialized state " + name);
+State::State(uint8_t number) {
+  this->number = number;
+  Serial.print("Initialized state ");
+  Serial.println(number);
 }
 
-void State::begin() { Serial.println("Beginning state " + this->name); }
-
-bool State::shouldAdvance(rocket_sensor_data* sensor_data, unsigned long dt) {
-  char debugMessage[200];
-  unsigned long now = micros();
-
-  sprintf(debugMessage, "Advance %s - %lu", this->name.c_str(), now);
-  Serial.println(debugMessage);
-
-  return false;
+void State::begin() {
+  Serial.print("Beginning state ");
+  Serial.println(this->number);
 }
+
+bool State::shouldAdvance(rocket_sensor_data* sensor_data, unsigned long dt) { return false; }

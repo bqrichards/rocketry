@@ -1,7 +1,7 @@
 #include "statemachine.h"
 
 StateMachine::StateMachine() {
-  this->states = new State*[0];
+  this->states = {};
   this->state_count = 0;
 }
 

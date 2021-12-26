@@ -8,7 +8,7 @@
 
 void run_tests() {
   // State
-  RUN_TEST(test_get_name);
+  RUN_TEST(test_get_number);
 
   // State machine
   RUN_TEST(test_current_state);

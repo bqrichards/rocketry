@@ -4,7 +4,7 @@
 
 #include "poweredFlight.h"
 
-StagePoweredFlight::StagePoweredFlight() : State("Powered Flight") {}
+StagePoweredFlight::StagePoweredFlight() : State(1) {}
 
 void StagePoweredFlight::begin() { State::begin(); }
 

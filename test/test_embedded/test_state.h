@@ -9,6 +9,6 @@
 #include <states/state.h>
 #include <unity.h>
 
-void test_get_name();
+void test_get_number();
 
 #endif  // RFCS_TEST_STATE_H

@@ -15,9 +15,9 @@ class State {
  public:
   /**
    * A normal state.
-   * @param name the name of the state
+   * @param state_number the number of the state
    */
-  explicit State(String name);
+  explicit State(uint8_t state_number);
 
   /**
    * Called when the state is first loaded
@@ -32,13 +32,13 @@ class State {
    */
   [[nodiscard]] virtual bool shouldAdvance(rocket_sensor_data* sensor_data, unsigned long dt);
 
-  String getName() { return name; }
+  uint8_t getNumber() { return number; }
 
  protected:
   /**
-   * Name of the state
+   * Number of the state
    */
-  String name;
+  uint8_t number;
 };
 
 #endif  // ROCKETRY_STATE_H

@@ -198,3 +198,5 @@ Temporary Items
 !.vscode/*.code-snippets
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,platformio,macos,c++,clion
+
+build

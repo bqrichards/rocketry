@@ -4,7 +4,7 @@
 
 #include "groundIdle.h"
 
-StageGroundIdle::StageGroundIdle() : State("Ground Idle") {}
+StageGroundIdle::StageGroundIdle() : State(0) {}
 
 void StageGroundIdle::begin() { State::begin(); }
 

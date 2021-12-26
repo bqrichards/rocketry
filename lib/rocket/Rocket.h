@@ -10,16 +10,29 @@
 #include "../interval/t_interval.h"
 #include "Adafruit_BMP280.h"
 #include "Adafruit_BNO055.h"
-#include "RH_RF22.h"
+// #include "RH_RF22.h"
 #include "statemachine.h"
 #include "states/states.h"
 #include "telemetry.h"
 
 #define NUM_ROCKET_STAGES 6
 
+enum SensorStatus {
+  /** Sensors are still calibrating */
+  pending = 7,
+
+  /** Sensors failed to calibrate */
+  failed = 8,
+
+  /** Sensors succeeded in calibration */
+  success = 9
+};
+
 class Rocket {
  public:
   Rocket();
+
+  ~Rocket();
 
   /**
    * Begins sensor boot
@@ -55,6 +68,13 @@ class Rocket {
   void send_telemetry();
 
   /**
+   * Set the sensor calibration
+   * 
+   * @param new_status the new status of the sensor calibration
+   */
+  void set_sensor_status(SensorStatus new_status);
+
+  /**
    * The current telemetry message
    */
   String telemetry_message = "";
@@ -82,7 +102,7 @@ class Rocket {
   /**
    * The state machine of the rocket
    */
-  StateMachine stateMachine = StateMachine();
+  StateMachine stateMachine;
 
   /**
    * IMU sensor
@@ -97,7 +117,12 @@ class Rocket {
   /**
    * Telemetry radio.
    */
-  RH_RF22* telemetry_radio;
+  // RH_RF22* telemetry_radio;
+
+  /**
+   * The current status of the sensors
+   */
+  SensorStatus sensor_status = pending;
 
   /**
    * Sensor data from all sensors
