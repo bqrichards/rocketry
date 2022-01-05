@@ -28,7 +28,7 @@ Rocket::Rocket() {
 
   // Create state machine
   Serial.println("Creating state machine");
-  this->stateMachine = StateMachine(this->states, NUM_ROCKET_STAGES);
+  // this->stateMachine = StateMachine(this->states, NUM_ROCKET_STAGES);
 
   this->last_micro = micros();
 }
@@ -45,31 +45,38 @@ Rocket::~Rocket() {
 void Rocket::boot() {
   set_sensor_status(pending);
 
-  if (!this->imu.begin()) {
-    Serial.println("Ooops, no BNO055 detected ... Check your wiring or I2C ADDR!");
-    set_sensor_status(failed);
-    this->~Rocket();
-    while (1)
-      ;
-  }
-
-  delay(1000);
-
-  this->imu.setExtCrystalUse(true);
-
   if (!this->bmp.begin()) {
     Serial.println("Ooops, no BMP280 detected ... Check your wiring or I2C ADDR!");
     set_sensor_status(failed);
     this->~Rocket();
     while (1)
       ;
+  } else {
+    Serial.println("BMP280 detected");
   }
-
-  set_sensor_status(success);
 
   delay(1000);
 
+  if (!this->imu.begin()) {
+    Serial.println("Ooops, no BNO055 detected ... Check your wiring or I2C ADDR!");
+    set_sensor_status(failed);
+    this->~Rocket();
+    while (1)
+      ;
+  } else {
+    Serial.println("BNO055 detected");
+  }
+
+  delay(1000);
+
+  this->imu.setExtCrystalUse(true);
+
+  set_sensor_status(success);
+
   calibrate_altitude();
+
+  while (1)
+    ;
 }
 
 bool Rocket::tick() {
@@ -161,6 +168,7 @@ void Rocket::calibrate_altitude() {
 }
 
 void Rocket::set_sensor_status(SensorStatus new_status) {
+  if (this->sensor_status == new_status) return;
   this->sensor_status = new_status;
   digitalWrite(pending, LOW);
   digitalWrite(failed, LOW);
