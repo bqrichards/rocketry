@@ -25,7 +25,9 @@ void run_tests() {
   RUN_TEST(test_pressure);
   RUN_TEST(test_altitude);
   RUN_TEST(test_temperature);
-  RUN_TEST(test_all);
+  RUN_TEST(test_all_data);
+  RUN_TEST(test_imu_status);
+  RUN_TEST(test_bmp_status);
 }
 
 void setup() {

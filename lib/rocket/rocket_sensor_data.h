@@ -48,4 +48,20 @@ typedef struct rocket_sensor_data {
   float temperature = 0;
 } rocket_sensor_data;
 
+enum SensorType { imu_sensor, bmp_sensor };
+
+enum SensorStatus {
+  /** Sensor is uninitialized */
+  uninitialized = 6,
+
+  /** Sensor is calibrating */
+  pending = 7,
+
+  /** Sensor failed to calibrate */
+  fail = 8,
+
+  /** Sensor succeeded in calibration */
+  success = 9
+};
+
 #endif  // ROCKETRY_ROCKET_SENSOR_DATA_H

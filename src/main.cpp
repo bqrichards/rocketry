@@ -1,14 +1,15 @@
 #include <Arduino.h>
 #include <Rocket.h>
 
+Rocket r;
+
 void setup() {
   Serial.begin(9600);
-  Rocket r;
   r.boot();
 }
 
 void loop() {
-  // if (r.tick()) {
-  //   exit(0);
-  // }
+  if (r.tick()) {
+    exit(0);
+  }
 }

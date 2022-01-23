@@ -17,25 +17,12 @@
 
 #define NUM_ROCKET_STAGES 6
 
-enum SensorStatus {
-  /** Sensors are still calibrating */
-  pending = 7,
-
-  /** Sensors failed to calibrate */
-  failed = 8,
-
-  /** Sensors succeeded in calibration */
-  success = 9
-};
-
 class Rocket {
  public:
-  Rocket();
-
   ~Rocket();
 
   /**
-   * Begins sensor boot
+   * Begins boot initialization
    */
   void boot();
 
@@ -46,6 +33,11 @@ class Rocket {
   bool tick();
 
  protected:
+  /**
+   * Begins sensor configuration
+   */
+  void configure_sensors();
+
   /**
    * Takes samples from altitude on launchpad and
    * sets the ground-level altitude
@@ -65,14 +57,16 @@ class Rocket {
   /**
    * Send data to telemetry
    */
+  void send_sensor_data_telemetry();
+
   void send_telemetry();
 
   /**
-   * Set the sensor calibration
-   * 
-   * @param new_status the new status of the sensor calibration
+   * Send sensor status
+   * @param sensor_type sensor
+   * @param sensor_status status
    */
-  void set_sensor_status(SensorStatus new_status);
+  void send_sensor_status_telemetry(SensorType sensor_type, SensorStatus sensor_status);
 
   /**
    * The current telemetry message
@@ -118,11 +112,6 @@ class Rocket {
    * Telemetry radio.
    */
   // RH_RF22* telemetry_radio;
-
-  /**
-   * The current status of the sensors
-   */
-  SensorStatus sensor_status = pending;
 
   /**
    * Sensor data from all sensors

@@ -12,10 +12,18 @@
 #include "rocket_sensor_data.h"
 
 /**
- * Formats rocket sensor data into CSV
+ * Formats sensor data
  * @param data rocket sensor data
  * @param out the string to write
  */
-void format_sensor_data_to_csv(rocket_sensor_data* data, String* out);
+void format_sensor_data(rocket_sensor_data* data, String* out);
+
+/**
+ * Formats sensor status
+ * @param sensor_type the sensor being reported on
+ * @param sensor_status the sensor status
+ * @param out the string to write
+ */
+void format_sensor_status(SensorType sensor_type, SensorStatus status, String* out);
 
 #endif  // ROCKETRY_TELEMETRY_H

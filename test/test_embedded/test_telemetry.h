@@ -16,6 +16,9 @@ void test_orientation();
 void test_pressure();
 void test_altitude();
 void test_temperature();
-void test_all();
+void test_all_data();
+
+void test_imu_status();
+void test_bmp_status();
 
 #endif  // RFCS_TEST_TELEMETRY_H

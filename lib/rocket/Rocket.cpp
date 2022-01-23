@@ -4,21 +4,29 @@
 
 #include "Rocket.h"
 
-Rocket::Rocket() {
+Rocket::~Rocket() {
+  // free(this->telemetry_radio);
+
+  // Free pointers to states
+  for (State* state : this->states) {
+    free(state);
+  }
+}
+
+void Rocket::boot() {
   // Initialize IMU
-  Serial.println("Creating imu");
   this->imu = Adafruit_BNO055(55);
+  send_sensor_status_telemetry(imu_sensor, pending);
 
   // Initialize bmp
-  Serial.println("Creating bmp");
   this->bmp = Adafruit_BMP280();
+  send_sensor_status_telemetry(bmp_sensor, pending);
 
   // Initialize radio
   // Serial.println("Creating radio");
   // this->telemetry_radio = new RH_RF22(10, 3);
 
   // Create states
-  Serial.println("Creating states");
   this->states[0] = new StageGroundIdle();
   this->states[1] = new StagePoweredFlight();
   this->states[2] = new StateUnpoweredFlight();
@@ -27,56 +35,41 @@ Rocket::Rocket() {
   this->states[5] = new StateLanded();
 
   // Create state machine
-  Serial.println("Creating state machine");
-  // this->stateMachine = StateMachine(this->states, NUM_ROCKET_STAGES);
+  this->stateMachine = StateMachine(this->states, NUM_ROCKET_STAGES);
 
   this->last_micro = micros();
+
+  configure_sensors();
 }
 
-Rocket::~Rocket() {
-  // free(this->telemetry_radio);
-
-  // Free pointers to states
-  for (int i = 0; i < NUM_ROCKET_STAGES; i++) {
-    free(this->states[i]);
-  }
-}
-
-void Rocket::boot() {
-  set_sensor_status(pending);
-
+void Rocket::configure_sensors() {
+  send_sensor_status_telemetry(bmp_sensor, pending);
   if (!this->bmp.begin()) {
-    Serial.println("Ooops, no BMP280 detected ... Check your wiring or I2C ADDR!");
-    set_sensor_status(failed);
+    send_sensor_status_telemetry(bmp_sensor, fail);
     this->~Rocket();
     while (1)
       ;
-  } else {
-    Serial.println("BMP280 detected");
   }
+
+  send_sensor_status_telemetry(bmp_sensor, success);
 
   delay(1000);
 
+  send_sensor_status_telemetry(imu_sensor, pending);
   if (!this->imu.begin()) {
-    Serial.println("Ooops, no BNO055 detected ... Check your wiring or I2C ADDR!");
-    set_sensor_status(failed);
+    send_sensor_status_telemetry(imu_sensor, fail);
     this->~Rocket();
     while (1)
       ;
-  } else {
-    Serial.println("BNO055 detected");
   }
+
+  send_sensor_status_telemetry(imu_sensor, success);
 
   delay(1000);
 
   this->imu.setExtCrystalUse(true);
 
-  set_sensor_status(success);
-
   calibrate_altitude();
-
-  while (1)
-    ;
 }
 
 bool Rocket::tick() {
@@ -85,7 +78,7 @@ bool Rocket::tick() {
 
   if (t_check(&this->telemetry_interval)) {
     t_reset(&this->telemetry_interval);
-    this->send_telemetry();
+    this->send_sensor_data_telemetry();
   }
 
   bool stateDone = this->stateMachine.currentState()->shouldAdvance(&this->sensor_data, this->dt);
@@ -123,27 +116,20 @@ void Rocket::poll_sensors() {
   if (t_check(&this->barometer_interval)) {
     t_reset(&this->barometer_interval);
     // TODO - readTemperature is called in readPressure, readPressure is called in readAltitude.
-    // optimize
+    // TODO optimize
     this->sensor_data.temperature = this->bmp.readTemperature();
     this->sensor_data.pressure = this->bmp.readPressure();
     this->sensor_data.altitude = this->bmp.readAltitude();
   }
 }
 
-void Rocket::send_telemetry() {
-  // Format data
-  format_sensor_data_to_csv(&this->sensor_data, &this->telemetry_message);
-
-  // Log data local
-  Serial.println(this->telemetry_message);
-
-  // Send data remote
-  // this->telemetry_radio->send(reinterpret_cast<const uint8_t*>(this->telemetry_message.c_str()),
-  //                             this->telemetry_message.length());
+void Rocket::send_sensor_data_telemetry() {
+  format_sensor_data(&this->sensor_data, &this->telemetry_message);
+  send_telemetry();
 }
 
 void Rocket::calibrate_altitude() {
-  Serial.println("Calibrating altitude");
+  //  Serial.println("Calibrating altitude");
 
   // Measure average altitude on launchpad
   uint8_t sample_count = 50;
@@ -163,15 +149,21 @@ void Rocket::calibrate_altitude() {
 
   this->ground_altitude = total_altitude / sample_count;
 
-  Serial.print("Calibration done. Ground altitude: ");
-  Serial.println(this->ground_altitude);
+  // TODO - spec
+  //  Serial.print("Calibration done. Ground altitude: ");
+  //  Serial.println(this->ground_altitude);
 }
 
-void Rocket::set_sensor_status(SensorStatus new_status) {
-  if (this->sensor_status == new_status) return;
-  this->sensor_status = new_status;
-  digitalWrite(pending, LOW);
-  digitalWrite(failed, LOW);
-  digitalWrite(success, LOW);
-  digitalWrite(new_status, HIGH);
+void Rocket::send_sensor_status_telemetry(SensorType sensor_type, SensorStatus sensor_status) {
+  format_sensor_status(sensor_type, sensor_status, &this->telemetry_message);
+  send_telemetry();
+}
+
+void Rocket::send_telemetry() {
+  // Log data local
+  Serial.println(this->telemetry_message);
+
+  // Send data remote
+  // this->telemetry_radio->send(reinterpret_cast<const uint8_t*>(this->telemetry_message.c_str()),
+  //                             this->telemetry_message.length());
 }
