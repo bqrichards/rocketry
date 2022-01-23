@@ -26,4 +26,11 @@ void format_sensor_data(rocket_sensor_data* data, String* out);
  */
 void format_sensor_status(SensorType sensor_type, SensorStatus status, String* out);
 
+/**
+ * Format ground altitude message
+ * @param calibrating
+ * @param altitude
+ */
+void format_ground_altitude(bool calibrating, float altitude, String* out);
+
 #endif  // ROCKETRY_TELEMETRY_H

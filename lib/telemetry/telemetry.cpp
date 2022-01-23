@@ -43,3 +43,8 @@ void format_sensor_status(SensorType sensor_type, SensorStatus status, String* o
 
   *out = String("SS[" + sensor_name + "," + sensor_status + "]");
 }
+
+void format_ground_altitude(bool calibrating, float altitude, String* out) {
+  String calibrating_str = calibrating ? "t" : "f";
+  *out = String("GA[" + calibrating_str + "," + String(altitude, 2) + "]");
+}

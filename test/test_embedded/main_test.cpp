@@ -28,6 +28,8 @@ void run_tests() {
   RUN_TEST(test_all_data);
   RUN_TEST(test_imu_status);
   RUN_TEST(test_bmp_status);
+  RUN_TEST(test_ground_altitude_true);
+  RUN_TEST(test_ground_altitude_false);
 }
 
 void setup() {

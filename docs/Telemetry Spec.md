@@ -7,15 +7,17 @@
 ### Sensor status
 - Format: `SS[name,status]`
 - `name`
-	- `imu`
-	- `bmp`
+	- `i` - imu
+	- `b` - bmp
 - `status`
-	- `uninitialized`
-	- `pending`
-	- `success`
-	- `fail`
+	- `u` - uninitialized
+	- `p` - pending
+	- `s` - success
+	- `f` - fail
 
 
-### TODO - ground altitude calibration
-- calibrating
-- finished, altitude
+### Ground altitude calibration
+- Format: `GA[calibrating,ground_altitude]`
+- `calibrating`
+	- `t` - true
+	- `f` - false

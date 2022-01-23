@@ -21,4 +21,7 @@ void test_all_data();
 void test_imu_status();
 void test_bmp_status();
 
+void test_ground_altitude_false();
+void test_ground_altitude_true();
+
 #endif  // RFCS_TEST_TELEMETRY_H

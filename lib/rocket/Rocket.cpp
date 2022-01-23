@@ -129,7 +129,7 @@ void Rocket::send_sensor_data_telemetry() {
 }
 
 void Rocket::calibrate_altitude() {
-  //  Serial.println("Calibrating altitude");
+  send_ground_altitude_telemetry(true);
 
   // Measure average altitude on launchpad
   uint8_t sample_count = 50;
@@ -149,9 +149,7 @@ void Rocket::calibrate_altitude() {
 
   this->ground_altitude = total_altitude / sample_count;
 
-  // TODO - spec
-  //  Serial.print("Calibration done. Ground altitude: ");
-  //  Serial.println(this->ground_altitude);
+  send_ground_altitude_telemetry(false);
 }
 
 void Rocket::send_sensor_status_telemetry(SensorType sensor_type, SensorStatus sensor_status) {
@@ -166,4 +164,9 @@ void Rocket::send_telemetry() {
   // Send data remote
   // this->telemetry_radio->send(reinterpret_cast<const uint8_t*>(this->telemetry_message.c_str()),
   //                             this->telemetry_message.length());
+}
+
+void Rocket::send_ground_altitude_telemetry(bool calibrating) {
+  format_ground_altitude(calibrating, this->ground_altitude, &this->telemetry_message);
+  send_telemetry();
 }

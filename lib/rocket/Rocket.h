@@ -55,9 +55,15 @@ class Rocket {
   void update_time();
 
   /**
-   * Send data to telemetry
+   * Send sensor data to telemetry
    */
   void send_sensor_data_telemetry();
+
+  /**
+   * Send ground altitude telemetry
+   * @param calibrating whether the sensor is calibrating
+   */
+  void send_ground_altitude_telemetry(bool calibrating);
 
   void send_telemetry();
 

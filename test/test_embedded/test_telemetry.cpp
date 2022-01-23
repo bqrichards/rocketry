@@ -102,3 +102,13 @@ void test_bmp_status() {
   format_sensor_status(bmp_sensor, fail, &out);
   TEST_ASSERT_EQUAL_STRING("SS[bmp,fail]", out.c_str());
 }
+
+void test_ground_altitude_false() {
+  format_ground_altitude(false, 0, &out);
+  TEST_ASSERT_EQUAL_STRING("GA[f,0]", out.c_str());
+}
+
+void test_ground_altitude_true() {
+  format_ground_altitude(false, 291.711791, &out);
+  TEST_ASSERT_EQUAL_STRING("GA[t,291.71]", out.c_str());
+}
